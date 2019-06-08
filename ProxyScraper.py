@@ -2,31 +2,51 @@ import requests, json
 from bs4 import BeautifulSoup as soup 
 import os,time
 
-url = ("http://proxy-daily.com/")
-req = requests.get(url)
-find = soup(req.text,"lxml")
-proxies = find.find_all("div",{"style":"border-radius:10px;white-space:pre-line;border:solid 3px #ff4c3b;background:#fff;color:#666;padding:4px;width:250px;height:400px;overflow:auto"})
-print(proxies,file=open("a.txt","a",encoding="UTF-8"))
-change = open("a.txt","r+")
-chagE = change.read().replace('[<div style="border-radius:10px;white-space:pre-line;border:solid 3px #ff4c3b;background:#fff;color:#666;padding:4px;width:250px;height:400px;overflow:auto">',"HTTPS PROXIES \n",1)
-chaE = chagE.replace('</div>, <div style="border-radius:10px;white-space:pre-line;border:solid 3px #ff4c3b;background:#fff;color:#666;padding:4px;width:250px;height:400px;overflow:auto">',"SOCKS 4 \n",1)
-chE = chaE.replace('</div>, <div style="border-radius:10px;white-space:pre-line;border:solid 3px #ff4c3b;background:#fff;color:#666;padding:4px;width:250px;height:400px;overflow:auto">',"SOCKS 5 \n",1)
+import colorama
+from colorama import init,Back,Fore
+init()
+try:
+	os.system("cls")
+except:
+	os.system("clear")
 
-print(chE,file=open("proxy.txt","a"))
-proxies = open("proxy.txt","r+")
-change.close()
-os.remove("a.txt")
-proxy_https = open("https.txt","a+",encoding="UTF-8")
-for lines in proxies.readlines():
-	a = True
-	while  a == True:
-		try:
-			proxy_https.write(lines)
-			if "SOCKS 4" in lines:
-				proxy_https.close()
-		except:	
-			pass
-		break
+
+banner="""__              ____                    __ 
+  / /  ___ _    __/ / /__ _    _________ _/ /_
+ / _ \/ _ \ |/|/ / / / _ \ |/|/ / __/ _ `/ __/
+/_//_/\___/__,__/_/_/\___/__,__/\__/\_,_/\__/                      
+ """
+
+
+a = open("https.txt","r+")
+b = open("socks4.txt","r+")
+c = open("socks5.txt","r+")
+
+class scrapy():
+	
+	def get(self):
+		url = ("http://proxy-daily.com/")
+		req = requests.get(url)
+		k = soup(req.text,"lxml")
+		proxies = k.find_all("div",{"style":"border-radius:10px;white-space:pre-line;border:solid 3px #ff4c3b;background:#fff;color:#666;padding:4px;width:250px;height:400px;overflow:auto"})
+		self.write(proxies)	
+	def write(self,proxies):
+		print(proxies[0],file=a)
+		print(proxies[1],file=b)
+		print(proxies[2],file=c)
+		
+if __name__ == '__main__':
+	print(Fore.RED+banner)
+	print(Fore.RED+Back.YELLOW)
+	print("wait...")
+	time.sleep(2)
+	scrapy().get()
+
+
+
+
+
+
+
 	
 print("EXTRACCION COMPLETA:)")
-proxies.close()

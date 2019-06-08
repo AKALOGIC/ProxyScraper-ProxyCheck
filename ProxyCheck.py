@@ -9,7 +9,8 @@ print("""
 [03] SOCKS5
 	""")
 tipo = input("[PANDORACHECK]$")
-k = input("DIGA LA RUTA DEL ARCHIVO")
+print("DIGA LA RUTA DEL ARCHIVO")
+k = input("[PANDORACHECK]$")
 if tipo == "01" or tipo == "1":
 	tipo = "http"
 if tipo == "02" or tipo == "2":

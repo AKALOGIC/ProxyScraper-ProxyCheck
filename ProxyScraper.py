@@ -27,7 +27,10 @@ class scrapy():
 	def get(self):
 		url = ("http://proxy-daily.com/")
 		req = requests.get(url)
-		k = soup(req.text,"lxml")
+		try:
+			k = soup(req.text,"lxml")
+		except:
+			k = soup(req.text,"html")
 		proxies = k.find_all("div",{"style":"border-radius:10px;white-space:pre-line;border:solid 3px #ff4c3b;background:#fff;color:#666;padding:4px;width:250px;height:400px;overflow:auto"})
 		self.write(proxies)	
 	def write(self,proxies):
